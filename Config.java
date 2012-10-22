@@ -12,9 +12,9 @@ public class Config{
     
     
     public int load(String s_filePath){
-        System.out.println("jjL> load Config");
+        System.out.println("%> load Config");
         if(loadLocalInformation(new File(getPath()+s_filePath))!=0){
-            System.out.println("jjL> BalancerURI: "+this.s_balancerURI);
+            System.out.println("%> BalancerURI: "+this.s_balancerURI);
         }
         return 0;
     }

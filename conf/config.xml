@@ -1,7 +1,7 @@
 <node>
 	<balancers>
 		<balancer>
-			jec-s-one.com
+			172.0.0.1
 		</balancer>
 	</balancers>
 </node>

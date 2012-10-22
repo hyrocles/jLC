@@ -12,21 +12,21 @@ public class XMLDriver{
     
     private Document obj_doc;
     
-    public int load(File obj_file)throws IOException{
+    public boolean load(File obj_file)throws IOException{
         try{
             DocumentBuilderFactory obj_dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder obj_db = obj_dbf.newDocumentBuilder();
             try{
                 this.obj_doc = obj_db.parse(obj_file);
             }catch(SAXException e){
-                 return 0;
+                 return false;
             }
             this.obj_doc.getDocumentElement().normalize();
         }catch(ParserConfigurationException e){
-            return 0;
+            return false;
         }
         
-        return 1;
+        return true;
     }
     
     public String getBalancer(){

@@ -4,19 +4,15 @@ import java.io.FileNotFoundException;
 
 import java.net.URISyntaxException;
 
-import org.xml.sax.SAXException;
-
 public class Config{
     
     private String s_balancerURI;
     
-    
-    public int load(String s_filePath){
-        System.out.println("%> load Config");
-        if(loadLocalInformation(new File(getPath()+s_filePath))!=0){
-            System.out.println("%> BalancerURI: "+this.s_balancerURI);
+    public boolean load(String s_filePath){
+        if(loadLocalInformation(new File(getPath()+s_filePath))){
+            System.out.println("%> Balancer: "+this.s_balancerURI);
         }
-        return 0;
+        return false;
     }
     
     public String getPath(){
@@ -31,27 +27,23 @@ public class Config{
         this.s_balancerURI = balancerURI;
     }
     
-    public int loadLocalInformation(File obj_file){
-        String s_balancer = null;
+    public boolean loadLocalInformation(File obj_file){
+        String s_balancer = "";
         
         try{
             XMLDriver obj_xml = new XMLDriver();
-            obj_xml.load(obj_file);
-            s_balancer = obj_xml.getBalancer();
+            if(obj_xml.load(obj_file)){
+                s_balancer = obj_xml.getBalancer();
+            }
         }catch(IOException  e){
-            return 0;
+            return false;
         }
         
-        if(s_balancer != null){
+        if(s_balancer != ""){
             setLocalInformation(s_balancer);
-            return 1;
+            return true;
         }else{
-            return 0;
+            return false;
         }
     }
-    
-    public int setOnlineInformatio(){
-        
-        return 0;
-    }    
 }

@@ -9,6 +9,8 @@ public class ServiceNode{
     
     public static void main(String[] args){
         Config obj_config = new Config();
-        obj_config.load("conf/config.xml");
+        if(obj_config.load("conf/config.xml")){
+            //...   
+        }
     }
 }

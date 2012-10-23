@@ -16,13 +16,9 @@ public class XMLDriver{
         try{
             DocumentBuilderFactory obj_dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder obj_db = obj_dbf.newDocumentBuilder();
-            try{
-                this.obj_doc = obj_db.parse(obj_file);
-            }catch(SAXException e){
-                 return false;
-            }
+            this.obj_doc = obj_db.parse(obj_file);
             this.obj_doc.getDocumentElement().normalize();
-        }catch(ParserConfigurationException e){
+        }catch(ParserConfigurationException | SAXException e){
             return false;
         }
         

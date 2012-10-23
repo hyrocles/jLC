@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-import java.io.FileNotFoundException;
-
 import java.net.URISyntaxException;
 
 public class Config{
@@ -10,9 +8,12 @@ public class Config{
     
     public boolean load(String s_filePath){
         if(loadLocalInformation(new File(getPath()+s_filePath))){
-            System.out.println("%> Balancer: "+this.s_balancerURI);
+            loadOnlineInformation(this.s_balancerURI);
+            return true;
+        }else{
+            System.out.println("%> cant load "+this.s_balancerURI);
+            return false;
         }
-        return false;
     }
     
     public String getPath(){
@@ -45,5 +46,15 @@ public class Config{
         }else{
             return false;
         }
+    }
+    
+    public boolean loadOnlineInformation(String balancerURI){
+        if(balancerURI != ""){
+            // new Client
+            // connect Balancer
+            // auth. Methode
+            // getRouting
+        }
+        return false;
     }
 }

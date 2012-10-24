@@ -1,4 +1,3 @@
-
 /**
  * ServiceNode.
  * 
@@ -7,11 +6,28 @@
  */
 public class ServiceNode{
     
-    public static void main(String[] args){
+	private static boolean initServices(){
         Config obj_config = new Config();
+        
         if(obj_config.load("conf/config.xml")){
-            System.out.println("%> no Error");
-            //...   
+            //...  
+        	switch(obj_config.getNodeType().toLowerCase()){
+        		case "balancer":
+        			//...
+        			// break;
+        			
+        		case "node":
+        			//...
+        			break;
+        	}
+        	return true;
         }
+		return false;
+	}
+	
+    public static void main(String[] args){
+    	if(initServices()){
+            System.out.println("%> no Error");
+    	}
     }
 }

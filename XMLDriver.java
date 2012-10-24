@@ -10,26 +10,16 @@ import org.xml.sax.SAXException;
 
 public class XMLDriver{
     
-    private Document obj_doc;
-    
-    public boolean load(File obj_file)throws IOException{
+    public Document loadFromFile(File obj_file)throws IOException{
+    	Document obj_doc;
         try{
             DocumentBuilderFactory obj_dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder obj_db = obj_dbf.newDocumentBuilder();
-            this.obj_doc = obj_db.parse(obj_file);
-            this.obj_doc.getDocumentElement().normalize();
+            obj_doc = obj_db.parse(obj_file);
+            obj_doc.getDocumentElement().normalize();
         }catch(ParserConfigurationException | SAXException e){
-            return false;
-        }
-        
-        return true;
-    }
-    
-    public String getBalancer(){
-        if(obj_doc != null){
-            return obj_doc.getElementsByTagName("balancer").item(0).getTextContent().trim();
-        }else{
             return null;
         }
+        return obj_doc;
     }
 }

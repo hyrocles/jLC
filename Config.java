@@ -1,22 +1,19 @@
 import java.io.File;
 import java.io.IOException;
+
 import java.net.URISyntaxException;
+
+import org.w3c.dom.Document;
 
 public class Config{
     
-    private String s_balancerURI;
+    private Document xml_localInformation;
     
-    public boolean load(String s_filePath){
-        if(loadLocalInformation(new File(getPath()+s_filePath))){
-            loadOnlineInformation(this.s_balancerURI);
-            return true;
-        }else{
-            System.out.println("%> cant load "+this.s_balancerURI);
-            return false;
-        }
+    private void setXml_localInformation(Document localInformation){
+    	this.xml_localInformation = localInformation;
     }
     
-    public String getPath(){
+    private String getPath(){
         try{
             return Config.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
         }catch(URISyntaxException e){
@@ -24,37 +21,43 @@ public class Config{
         }
     }
     
-    public void setLocalInformation(String balancerURI){
-        this.s_balancerURI = balancerURI;
-    }
-    
-    public boolean loadLocalInformation(File obj_file){
-        String s_balancer = "";
+    private boolean loadLocalInformation(File obj_file){
+        Document xml_tempInformation = null;
         
         try{
-            XMLDriver obj_xml = new XMLDriver();
-            if(obj_xml.load(obj_file)){
-                s_balancer = obj_xml.getBalancer();
+            XMLDriver obj_XMLDriver = new XMLDriver();
+            xml_tempInformation = obj_XMLDriver.loadFromFile(obj_file);
+            if(xml_tempInformation != null){
+            	setXml_localInformation(xml_tempInformation);
+                return true;
             }
         }catch(IOException  e){
             return false;
         }
-        
-        if(s_balancer != ""){
-            setLocalInformation(s_balancer);
-            return true;
-        }else{
-            return false;
-        }
+		return false;
     }
     
-    public boolean loadOnlineInformation(String balancerURI){
-        if(balancerURI != ""){
+    private boolean loadOnlineInformation(String balancerURI){
+        if(xml_localInformation != null){
             // new Client
             // connect Balancer
             // auth. Methode
             // getRouting
         }
         return false;
+    }
+    
+    public boolean load(String s_filePath){
+        if(loadLocalInformation(new File(getPath()+s_filePath))){
+            loadOnlineInformation("");
+            return true;
+        }else{
+            System.out.println("%> cant load local Information");
+            return false;
+        }
+    }
+    
+    public String getNodeType(){
+    	return "node";
     }
 }

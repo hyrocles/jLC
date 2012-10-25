@@ -1,7 +1,8 @@
-<node>
-	<balancers>
-		<balancer>
-			localhost
-		</balancer>
-	</balancers>
+<node ident="b_01" type="node">
+	<connections>
+		<connection type="balancer" ip="68.190.10.1" port="5555" />
+		<connection type="balancer" ip="127.0.0.1" port="6937">
+			<guidelines />
+		</connection>
+	</connections>
 </node>

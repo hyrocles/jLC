@@ -13,6 +13,7 @@ public class ServiceNode{
             //...  
         	switch(obj_config.getNodeType().toLowerCase()){
         		case "balancer":
+        			System.out.println("%> job:balancer");
         			//...
         			// break;
         			

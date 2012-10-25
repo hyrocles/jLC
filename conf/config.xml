@@ -1,6 +1,7 @@
-<node ident="b_01" type="balancer">
+<node ident="b_01" type="node">
 	<connections>
-		<connection type="service" ip="" port="6937">
+		<connection type="balancer" ip="68.190.10.1" port="5555" />
+		<connection type="balancer" ip="127.0.0.1" port="6937">
 			<guidelines />
 		</connection>
 	</connections>

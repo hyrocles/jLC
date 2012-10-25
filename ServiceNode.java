@@ -11,7 +11,7 @@ public class ServiceNode{
         
         if(obj_config.load("conf/config.xml")){
             //...  
-        	switch(obj_config.getNodeType().toLowerCase()){
+			switch (obj_config.getNodeType().toLowerCase()){
         		case "balancer":
         			System.out.println("%> job:balancer");
         			//...
